@@ -85,10 +85,10 @@
                                 <li><a href="javascript:void(0);"><span>Đơn hàng</span></a>
                                     <ul>
                                         <li><a href="{{ route('dashboard.order.pending') }}">Chờ xử lý</a></li>
-                                        <li><a href="blog-post.html">Đang xử lý</a></li>
-                                        <li><a href="blog-post.html">Đã vận chuyển</a></li>
-                                        <li><a href="blog-post.html">Đã hoàn thành</a></li>
-                                        <li><a href="blog-post.html">Đã hủy</a></li>
+                                        <li><a href="{{ route('dashboard.order.processing') }}">Đang xử lý</a></li>
+                                        <li><a href="{{ route('dashboard.order.shipped') }}">Đã vận chuyển</a></li>
+                                        <li><a href="{{ route('dashboard.order.completed') }}">Đã hoàn thành</a></li>
+                                        <li><a href="{{ route('dashboard.order.cancelled') }}">Đã hủy</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0);"><span>Sản phẩm</span></a>
