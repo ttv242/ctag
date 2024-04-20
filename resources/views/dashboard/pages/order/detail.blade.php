@@ -36,10 +36,26 @@
                                 <p class="mb-0"><b>Email :</b> {{ $order->email }}</p>
                                 <p><b>Địa chỉ :</b> {{ $order->address }}</p>
                             </div>
+                            @if($order->status == 'cancelled' || $order->status == 'completed')
                             <div class="col-lg-4 col-md-12 text-right">
-                                <button class="btn bg-danger text-light">Hủy đơn</button>
-                                <button class="btn bg-secondary text-light">Duyệt đơn</button>
+                                <button class="btn bg-{{ $order->status == 'completed' ? 'success' : 'danger' }} text-light" disabled>{{ $order->status }}</button>
                             </div>
+                            @elseif($order->status=='pending')
+                            <div class="col-lg-4 col-md-12 text-right">
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/cancelled" class="btn bg-danger text-light">Hủy đơn</a>
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Duyệt đơn</a>
+                            </div>
+                            @elseif($order->status=='processing')
+                            <div class="col-lg-4 col-md-12 text-right">
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/cancelled" class="btn bg-danger text-light">Hủy đơn</a>
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Xử lý đơn</a>
+                            </div>
+                            @elseif($order->status=='shipped')
+                            <div class="col-lg-4 col-md-12 text-right">
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/cancelled" class="btn bg-danger text-light">Hủy đơn</a>
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Vận chuyển</a>
+                            </div>
+                            @endif
                         </div>
                         <div class="table-responsive">
                             <table class="table">

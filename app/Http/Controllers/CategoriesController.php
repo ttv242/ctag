@@ -33,9 +33,9 @@ class CategoriesController extends Controller
                     $apiController->clearDataJson('data/category.json');
                     $apiController->clearDataJson('data/subcategory.json');
                     $apiController->clearDataJson('data/product.json');
-                    $apiController->clearDataJson('order/monthlyOffers.json');
-                    $apiController->clearDataJson('order/sale.json');
-                    $apiController->clearDataJson('order/view.json');
+                    $apiController->clearDataJson('orther/monthlyOffers.json');
+                    $apiController->clearDataJson('orther/sale.json');
+                    $apiController->clearDataJson('orther/view.json');
                     smilify('success', 'Xóa danh mục ' . $request->name . ' thành công!');
                     return redirect()->back();
                 } else {
@@ -62,9 +62,9 @@ class CategoriesController extends Controller
                         $apiController->clearDataJson('data/category.json');
                         $apiController->clearDataJson('data/subcategory.json');
                         $apiController->clearDataJson('data/product.json');
-                        $apiController->clearDataJson('order/monthlyOffers.json');
-                        $apiController->clearDataJson('order/sale.json');
-                        $apiController->clearDataJson('order/view.json');
+                        $apiController->clearDataJson('orther/monthlyOffers.json');
+                        $apiController->clearDataJson('orther/sale.json');
+                        $apiController->clearDataJson('orther/view.json');
                         smilify('success', 'cập nhật danh mục ' . $request->name . ' thành công!');
                         return redirect()->route('dashboard.cat');
                     } else {
@@ -110,9 +110,9 @@ class CategoriesController extends Controller
             $apiController->clearDataJson('data/category.json');
             $apiController->clearDataJson('data/subcategory.json');
             $apiController->clearDataJson('data/product.json');
-            $apiController->clearDataJson('order/monthlyOffers.json');
-            $apiController->clearDataJson('order/sale.json');
-            $apiController->clearDataJson('order/view.json');
+            $apiController->clearDataJson('orther/monthlyOffers.json');
+            $apiController->clearDataJson('orther/sale.json');
+            $apiController->clearDataJson('orther/view.json');
             smilify('success', 'Tạo danh mục ' . $request->name . ' thành công!');
         }
 

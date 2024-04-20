@@ -111,7 +111,13 @@ Route::middleware(['auth', 'role'])->group(function() {
         Route::get('/san-pham-danh-muc/{slug1?}/{slug2?}/{paginate?}', [ProductsController::class, 'catPro'])->name('catPro');
 
         Route::get('/don-hang/cho-xu-ly', [OrderController::class, 'pending'])->name('order.pending');
+        Route::get('/don-hang/xu-ly', [OrderController::class, 'processing'])->name('order.processing');
+        Route::get('/don-hang/da-van-chuyen', [OrderController::class, 'shipped'])->name('order.shipped');
+        Route::get('/don-hang/da-van-chuyen-thanh-cong', [OrderController::class, 'completed'])->name('order.completed');
+        Route::get('/don-hang/don-hang-that-bai', [OrderController::class, 'cancelled'])->name('order.cancelled');
+    
         Route::get('/chi-tiet-don-hang/{slug?}', [OrderController::class, 'detail'])->name('order.detail');
+        Route::get('/don-hang/cap-nhat/{slug1?}/{slug2?}', [OrderController::class, 'update'])->name('order.update');
 
     });
 
