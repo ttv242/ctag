@@ -17,4 +17,4 @@ yarn-error.log
 /.idea
 /.vscode
 public/json/*
-public/picture/*
+public/picture/assets/upload/*

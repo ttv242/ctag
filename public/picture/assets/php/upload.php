@@ -1,5 +1,5 @@
 <?php
-$targetDir = "../upload/"; // Đường dẫn thư mục đích
+$targetDir = "../upload/images/"; // Đường dẫn thư mục đích
 $uploadedFiles = reArrayFiles($_FILES["file"]); // Chuyển đổi mảng tệp tin
 
 // Hàm chuyển đổi mảng tệp tin

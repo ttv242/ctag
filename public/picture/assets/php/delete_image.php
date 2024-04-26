@@ -5,7 +5,7 @@ $imageUrl = $data['imageUrl'];
 
 function deleteImage($imageUrl)
 {
-    $imagePath = '../upload/' . basename($imageUrl);
+    $imagePath = '../upload/images/' . basename($imageUrl);
 
     if (file_exists($imagePath)) {
         unlink($imagePath);
