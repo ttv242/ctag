@@ -33,19 +33,24 @@ class OrderController extends Controller
 
                             $apiController = new ApiController();
                             $apiController->clearDataJson('data/order.json');
-                            smilify('success', 'Đã duyệt đơn thành công!');
+                            smilify('success', 'Đã xử lý đơn thành công!');
                             return redirect()->back();
                         case 'shipped':
                             $order->status = 'completed';
                             $order->save();
+                            $orderItem = OrderItem::where('parent_id', $order->id)->get();
+                            foreach ($orderItem as $item) {
+                                $product = $item->products;
+                                $product['best_seller'] +=1;
+                                $product->save();
 
+                            }
                             $apiController = new ApiController();
                             $apiController->clearDataJson('data/order.json');
-                            smilify('success', 'Đã duyệt đơn thành công!');
+                            smilify('success', 'Đã vận chuyển thành công!');
                             return redirect()->back();
-
                     }
-                } elseif ($status == 'cancelled') {
+                } else if ($status == 'cancelled') {
                     $order->status = 'cancelled';
                     $order->save();
 
@@ -65,14 +70,14 @@ class OrderController extends Controller
     public function pending()
     {
         $pending  = Order::where('status', 'pending')->get();
-   
-            return view('dashboard.pages.order.pending', [
-                'title' => 'Danh sách đơn hàng chờ xử lý',
-                'pending' => $pending,
-            ]);
-        
+
+        return view('dashboard.pages.order.pending', [
+            'title' => 'Danh sách đơn hàng chờ xử lý',
+            'pending' => $pending,
+        ]);
     }
-    public function processing(){
+    public function processing()
+    {
         $processing  = Order::where('status', 'processing')->get();
         return view('dashboard.pages.order.processing', [
             'title' => 'Danh sách đơn hàng chờ xử lý',
@@ -80,7 +85,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function shipped(){
+    public function shipped()
+    {
         $shipped  = Order::where('status', 'shipped')->get();
         return view('dashboard.pages.order.shipped', [
             'title' => 'Danh sách đơn hàng chờ xử lý',
@@ -88,7 +94,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function completed(){
+    public function completed()
+    {
         $completed  = Order::where('status', 'completed')->get();
         return view('dashboard.pages.order.completed', [
             'title' => 'Danh sách đơn hàng chờ xử lý',
@@ -96,7 +103,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function cancelled(){
+    public function cancelled()
+    {
         $cancelled  = Order::where('status', 'cancelled')->get();
         return view('dashboard.pages.order.cancelled', [
             'title' => 'Danh sách đơn hàng chờ xử lý',

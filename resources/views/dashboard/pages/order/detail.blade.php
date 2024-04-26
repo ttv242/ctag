@@ -48,12 +48,12 @@
                             @elseif($order->status=='processing')
                             <div class="col-lg-4 col-md-12 text-right">
                                 <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/cancelled" class="btn bg-danger text-light">Hủy đơn</a>
-                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Xử lý đơn</a>
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Vận chuyển</a>
                             </div>
                             @elseif($order->status=='shipped')
                             <div class="col-lg-4 col-md-12 text-right">
                                 <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/cancelled" class="btn bg-danger text-light">Hủy đơn</a>
-                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Vận chuyển</a>
+                                <a href="{{ route('dashboard.order.update') }}/{{ $order->id }}/{{ $order->status }}" class="btn bg-secondary text-light">Đã hoàn thành</a>
                             </div>
                             @endif
                         </div>

@@ -1,15 +1,24 @@
+@php
+
+function countOrderNotify($status){
+    $className = "App\\Models\\Order";
+    $table = $className::where('status', $status)->get();
+    $count = count($table);
+    return $count;
+}
+
+@endphp
+
 <!-- main left menu -->
 <div id="left-sidebar" class="sidebar">
     <button type="button" class="btn-toggle-offcanvas"><i class="fa fa-arrow-left"></i></button>
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{ asset(Auth::user()->img) }}" class="rounded-circle user-photo"
-                alt="User Profile Picture">
+            <img src="{{ asset(Auth::user()->img) }}" class="rounded-circle user-photo" alt="User Profile Picture">
             <div class="dropdown">
                 <span>Xin chào,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong
-                        style="text-transform: capitalize;">
-                            {{ Auth::user()->name }}
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong style="text-transform: capitalize;">
+                        {{ Auth::user()->name }}
                     </strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
                     <li><a href="page-profile2.html"><i class="icon-user"></i>Tài khoản</a></li>
@@ -75,6 +84,7 @@
                                         <li><a href="{{ route('dashboard.pro') }}/da-an">Đã ẩn</a></li>
                                         <li><a href="{{ route('dashboard.crePro') }}">Thêm sản phẩm</a></li>
                                         <li><a href="{{ route('dashboard.monthlyOffers') }}">Ưu đãi tháng</a></li>
+                                        <li><a href="{{ route('dashboard.voucher') }}">Phiếu giảm giá</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -84,17 +94,18 @@
                             <ul>
                                 <li><a href="javascript:void(0);"><span>Đơn hàng</span></a>
                                     <ul>
-                                        <li><a href="{{ route('dashboard.order.pending') }}">Chờ xử lý</a></li>
-                                        <li><a href="{{ route('dashboard.order.processing') }}">Đang xử lý</a></li>
-                                        <li><a href="{{ route('dashboard.order.shipped') }}">Đã vận chuyển</a></li>
-                                        <li><a href="{{ route('dashboard.order.completed') }}">Đã hoàn thành</a></li>
-                                        <li><a href="{{ route('dashboard.order.cancelled') }}">Đã hủy</a></li>
+                                        <li><a href="{{ route('dashboard.order.pending') }}">Chờ xử lý<span class="badge badge-info float-right">{{countOrderNotify('pending')}}</span></a></li>
+                                        <li><a href="{{ route('dashboard.order.processing') }}">Đang xử lý<span class="badge badge-info float-right">{{countOrderNotify('processing')}}</span></a></li>
+                                        <li><a href="{{ route('dashboard.order.shipped') }}">Đã vận chuyển<span class="badge badge-info float-right">{{countOrderNotify('shipped')}}</span></a></li>
+                                        <li><a href="{{ route('dashboard.order.completed') }}">Đã hoàn thành<span class="badge badge-success float-right">{{countOrderNotify('completed')}}</span></a></li>
+                                        <li><a href="{{ route('dashboard.order.cancelled') }}">Đã hủy<span class="badge badge-danger float-right">{{countOrderNotify('cancelled')}}</span></a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0);"><span>Sản phẩm</span></a>
                                     <ul>
-                                        <li><a href="blog-dashboard.html">Xem nhiều</a></li>
-                                        <li><a href="blog-dashboard.html">Bán chạy</a></li>
+                                        <li><a href="{{ route('dashboard.statistica.viewPro')}}">Xem nhiều</a></li>
+                                        <li><a href="{{ route('dashboard.statistica.bestSeller')}}">Bán chạy</a></li>
+                                        <!-- <li><a href="blog-dashboard.html">Bán chạy</a></li> -->
                                     </ul>
                                 </li>
                                 {{-- <li><a href="javascript:void(0);"><span>Doanh thu</span></a>
@@ -171,13 +182,27 @@
             <div class="tab-pane" id="setting">
                 <h6>Choose Skin</h6>
                 <ul class="choose-skin list-unstyled">
-                    <li data-theme="purple"><div class="purple"></div></li>
-                    <li data-theme="blue"><div class="blue"></div></li>
-                    <li data-theme="cyan" class="active"><div class="cyan"></div></li>
-                    <li data-theme="green"><div class="green"></div></li>
-                    <li data-theme="orange"><div class="orange"></div></li>
-                    <li data-theme="blush"><div class="blush"></div></li>
-                    <li data-theme="red"><div class="red"></div></li>
+                    <li data-theme="purple">
+                        <div class="purple"></div>
+                    </li>
+                    <li data-theme="blue">
+                        <div class="blue"></div>
+                    </li>
+                    <li data-theme="cyan" class="active">
+                        <div class="cyan"></div>
+                    </li>
+                    <li data-theme="green">
+                        <div class="green"></div>
+                    </li>
+                    <li data-theme="orange">
+                        <div class="orange"></div>
+                    </li>
+                    <li data-theme="blush">
+                        <div class="blush"></div>
+                    </li>
+                    <li data-theme="red">
+                        <div class="red"></div>
+                    </li>
                 </ul>
 
                 <ul class="list-unstyled font_setting mt-3">
