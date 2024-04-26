@@ -19,11 +19,11 @@
 <x-notify::notify />
 
 @notifyJs
-
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/translations/es.js"></script>
     <script src="{{ asset('dashboard/ckfinder/ckfinder.js') }}"></script>
     <script>
+        
         // This sample still does not showcase all CKEditor 5 features (!)
         // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
         CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
@@ -168,5 +168,9 @@
             ]
         });
     </script>
+
+
+
+
 </body>
 </html>
