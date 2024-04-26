@@ -12,6 +12,8 @@ use App\Http\Controllers\SubcategoriesController;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\StatisticalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ use App\Http\Controllers\OrderController;
 // View::share('TPL_URL','https://hungthinhphatglasses.vn');
 // View::share('BASE_URL','/c9298361c68d4a67');
 // View::share('ADM_DIR','admin');
-View::share('PUBLIC_DIR',''); //public
+View::share('PUBLIC_DIR', ''); //public
 
 
 // Route::get('/', function () {
@@ -46,7 +48,9 @@ Route::get('/chi-tiet-tin-tuc', [PagesController::class, 'blog_single'])->name('
 Route::get('/lien-he', [PagesController::class, 'contact'])->name('contact');
 Route::get('/gio-hang', [PagesController::class, 'cart'])->name('cart');
 Route::get('/khach-hang', [PagesController::class, 'client'])->name('client');
+
 Route::post('/khach-hang/update/account', [UsersController::class, 'update'])->name('client.update.account');
+
 Route::post('/khach-hang/check/voucher', [PagesController::class, 'checkVoucher'])->name('client.check.voucher');
 Route::post('/khach-hang/order', [PagesController::class, 'order'])->name('client.order');
 Route::get('/khach-hang/order/{slug?}', [PagesController::class, 'order'])->name('client.order');
@@ -85,8 +89,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [UsersController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role'])->group(function() {
-    Route::prefix('zvcx')->name('dashboard.')->group(function() {
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::prefix('zvcx')->name('dashboard.')->group(function () {
+
+
+        //users
+        Route::get('/tai-khoan/{slug?}/{id?}',[UsersController::class,'acc'])->name('acc');
+        Route::get('/tao-tai-khoan',[UsersController::class,'creAcc'])->name('creAcc');
+        Route::post('/tao-tai-khoan',[UsersController::class,'creAcc'])->name('creAcc');
+        Route::put('/cap-nhat-tai-khoan/{slug?}/{id?}',[UsersController::class,'acc'])->name('updateAcc');
+
         Route::get('/', [DashboardController::class, 'dashboard']);
 
         Route::get('/danh-muc/{slug1?}/{slug2?}/{id?}', [CategoriesController::class, 'cat'])->name('cat');
@@ -107,6 +119,11 @@ Route::middleware(['auth', 'role'])->group(function() {
         // Route::post('/uu-dai-thang', [ProductsController::class, 'monthlyOffers'])->name('monthlyOffers');
         Route::get('/cap-nhat-san-pham/{slug?}/{id?}', [ProductsController::class, 'pro'])->name('updatePro');
 
+        Route::get('/phieu-giam-gia/{slug1?}/{id?}', [VoucherController::class, 'voucher'])->name('voucher');
+        // Route::get('/phieu-giam-gia', [VoucherController::class, 'voucher'])->name('voucher');
+        Route::get('/them-thieu-giam-gia', [VoucherController::class, 'creVou'])->name('creVou');
+        Route::post('/them-thieu-giam-gia', [VoucherController::class, 'creVou'])->name('creVou');
+
         Route::get('/san-pham-thuong-hieu/{slug?}/{paginate?}', [ProductsController::class, 'braPro'])->name('braPro');
         Route::get('/san-pham-danh-muc/{slug1?}/{slug2?}/{paginate?}', [ProductsController::class, 'catPro'])->name('catPro');
 
@@ -115,14 +132,20 @@ Route::middleware(['auth', 'role'])->group(function() {
         Route::get('/don-hang/da-van-chuyen', [OrderController::class, 'shipped'])->name('order.shipped');
         Route::get('/don-hang/da-van-chuyen-thanh-cong', [OrderController::class, 'completed'])->name('order.completed');
         Route::get('/don-hang/don-hang-that-bai', [OrderController::class, 'cancelled'])->name('order.cancelled');
-    
+
         Route::get('/chi-tiet-don-hang/{slug?}', [OrderController::class, 'detail'])->name('order.detail');
         Route::get('/don-hang/cap-nhat/{slug1?}/{slug2?}', [OrderController::class, 'update'])->name('order.update');
 
+        // THỐNG KÊ
+
+        Route::get('/luot-xem-san-pham', [StatisticalController::class, 'viewPro'])->name('statistica.viewPro');
+        Route::get('/luot-xem-san-pham/{startdate}/{enddate}', [StatisticalController::class, 'viewProdate'])->name('statistica.viewProdate');
+
+        Route::get('/Nguoi-ban-hang-gioi', [StatisticalController::class, 'bestSeller'])->name('statistica.bestSeller');
+        Route::get('/Nguoi-ban-hang-gioi/{start}/{end}', [StatisticalController::class, 'bestSellerdate'])->name('statistica.bestSellerdate');
     });
 
     Route::get('/picture/', [DashboardController::class, 'picture'])->name('dashboard.picture');
-
 });
 
 // require __DIR__.'/auth.php';

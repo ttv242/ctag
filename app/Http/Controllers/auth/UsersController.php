@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Helpers\CRUDHelper;
+
 
 class UsersController extends Controller
 {
-    //
+    //user
     public function register(Request $request)
     {
         $title = "Đăng ký";
@@ -64,7 +66,6 @@ class UsersController extends Controller
                 // dd(Auth::attempt($credentials, $remember_token));
                 // Đăng nhập thất bại
                 smilify('error', 'Email hoặc mật khẩu không chính xác!');
-
             }
         }
 
@@ -94,8 +95,8 @@ class UsersController extends Controller
             }
 
             if (isset($data['email'])) {
-                    unset($data['email']);
-                }
+                unset($data['email']);
+            }
 
 
             // Xử lý cập nhật các trường khác
@@ -134,5 +135,78 @@ class UsersController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    // admin
+    public function acc(Request $request, $slug = NULL, $id = NULL)
+    {
+        $title = "Quản trị viên";
+        $account = User::all();
+        if (!empty($slug) && $slug) {
+
+            if ($slug == 'delete' && $id) {
+                $CRUDHelper = new CRUDHelper();
+                $CRUDHelper->Delete(User::class, $id);
+                return redirect()->back();
+            } elseif ($slug == 'update' && $id) {
+                if ($request->isMethod('get')) {
+                    $data = User::find($id);
+                    // dd($data);
+                    // dd($slug1);
+                    return view('dashboard.pages.account.update', [
+                        'title' => $title,
+                        "slug" => $slug,
+                        'data' => $data,
+                    ]);
+                }
+                if ($request->isMethod('put')) {
+                    $CRUDHelper = new CRUDHelper();
+                    $data = [
+                        "role" => $request->role,
+                    ];
+
+
+                    User::where('id', $id)->update($data);
+                    return redirect()->route('dashboard.acc');
+                }
+            }
+        }
+
+
+        return view('dashboard.pages.account.list', [
+            'title' => $title,
+            'account' => $account
+        ]);
+    }
+
+    public function creAcc(Request $request)
+    {
+        $title = "Quản trị viên";
+
+
+        if ($request->isMethod('post')) {
+            $CRUDHelper = new CRUDHelper();
+            $pass = $request->except('_token');
+            $password = $pass['password'];
+            // dd($request->all());
+            $data = [
+                "name" => $request->name,
+
+                "img" => $request->img, // chưa xử lý
+                "phone" => $request->phone,
+                "email" => $request->email,
+                "role" => $request->role,
+                "status" => $request->status,
+                "password" => bcrypt($password),
+            ];
+            $CRUDHelper->Create(User::class, $data);
+
+            return redirect()->route('dashboard.acc');
+        }
+
+
+        return view('dashboard.pages.account.create', [
+            'title' => $title,
+        ]);
     }
 }

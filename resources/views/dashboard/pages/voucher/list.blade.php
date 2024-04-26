@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('dashboard.') }}"><i class="fa fa-dashboard"></i></a>
                             </li>
                             <li class="breadcrumb-item">Dashboard</li>
-                            <li class="breadcrumb-item">Thương hiệu</li>
+                            <li class="breadcrumb-item">Phiếu Giảm Giá</li>
                             <li class="breadcrumb-item active">Danh sách</li>
                         </ul>
                     </div>
@@ -34,7 +34,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="d-flex flex-row-reverse">
                                     <div class="page_action">
-                                        <a href="{{ route('dashboard.creBra') }}">
+                                        <a href="{{ route('dashboard.creVou') }}">
                                             <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i>
                                                 Thêm</button>
                                         </a>
@@ -49,27 +49,22 @@
                                     <thead>
                                         <tr>
                                             <th style="width:60px;">#</th>
-                                            <th>Tên</th>
-                                            <th class="text-center">Số lượng sản phẩm</th>
-                                            <th class="text-center col-2">Icon</th>
-                                            <th class="col-2 text-center">Chức năng</th>
+                                            <th class="text-center">Mã code</th>
+                                            <th class="text-center col-2">Giảm giá</th>
+                                            <th class="text-center col-2">thời hạn</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($brands as $key => $item)
+                                        @forelse ($voucher as $key => $item)
                                             <tr
                                                 class="text-{{ $item->featured == 1 ? 'success' : ($item->hidden == 1 ? 'danger' : '') }}">
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ ucfirst($item->name) }}</td>
-                                                <td class="text-center"><a href="san-pham-thuong-hieu/{{ $item->alias }}">{{ count($item->products) }}</a></td>
-                                                <td><img class="col-12" src="{{ asset($item->img) }}"
-                                                        alt="{{ $item->name }}"></td>
+                                                <td>{{ ucfirst($item->code) }}</td>
+                                                <td>{{ ucfirst($item->percent) }}</td>
+                                                <td>{{ ucfirst($item->created_at) }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-around px-4">
-                                                        <a id="editModalBtn" href="{{ route('dashboard.bra') }}/update/{{ $item->id }}" title="Sửa">
-                                                            <i class="fa fa-edit text-secondary"></i>
-                                                        </a>
-                                                        <a href="{{ route('dashboard.bra') }}/delete/{{ $item->id }}" title="Xóa">
+                                                        <a href="{{ route('dashboard.voucher') }}/delete/{{ $item->id }}" title="Xóa">
                                                             <i class="fa fa-trash-o text-danger"></i>
                                                         </a>
                                                     </div>
@@ -77,7 +72,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" class="text-center mt-2 h6 text-danger">Không có tài khoản
+                                                <td colspan="4" class="text-center mt-2 h6 text-danger">Không có mã giảm giá
                                                 </td>
                                             </tr>
                                         @endforelse

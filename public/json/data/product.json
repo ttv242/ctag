@@ -5501,7 +5501,7 @@
         "hidden": 0,
         "target_time": "2024-05-20 00:00:00",
         "created_at": "2024-04-20T09:13:52.000000Z",
-        "updated_at": "2024-04-20T09:13:52.000000Z",
+        "updated_at": "2024-04-20T09:32:15.000000Z",
         "product_details": {
             "id": 178,
             "parent_id": 178,
@@ -6144,7 +6144,7 @@
         "brands_id": 1,
         "name": "aut",
         "alias": "ut-perspiciatis-unde-itaque-qui-quasi-earum-aut",
-        "views": 202823190,
+        "views": 202823191,
         "best_rated": 147883,
         "best_seller": 98994,
         "trend": 0,
