@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\StatisticalController;
+use App\Http\Controllers\BlogsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,10 +95,10 @@ Route::middleware(['auth', 'role'])->group(function () {
 
 
         //users
-        Route::get('/tai-khoan/{slug?}/{id?}',[UsersController::class,'acc'])->name('acc');
-        Route::get('/tao-tai-khoan',[UsersController::class,'creAcc'])->name('creAcc');
-        Route::post('/tao-tai-khoan',[UsersController::class,'creAcc'])->name('creAcc');
-        Route::put('/cap-nhat-tai-khoan/{slug?}/{id?}',[UsersController::class,'acc'])->name('updateAcc');
+        Route::get('/tai-khoan/{slug?}/{id?}', [UsersController::class, 'acc'])->name('acc');
+        Route::get('/tao-tai-khoan', [UsersController::class, 'creAcc'])->name('creAcc');
+        Route::post('/tao-tai-khoan', [UsersController::class, 'creAcc'])->name('creAcc');
+        Route::put('/cap-nhat-tai-khoan/{slug?}/{id?}', [UsersController::class, 'acc'])->name('updateAcc');
 
         Route::get('/', [DashboardController::class, 'dashboard']);
 
@@ -143,6 +144,10 @@ Route::middleware(['auth', 'role'])->group(function () {
 
         Route::get('/Nguoi-ban-hang-gioi', [StatisticalController::class, 'bestSeller'])->name('statistica.bestSeller');
         Route::get('/Nguoi-ban-hang-gioi/{start}/{end}', [StatisticalController::class, 'bestSellerdate'])->name('statistica.bestSellerdate');
+
+        // Tin tức
+        Route::get('/tin-tuc', [BlogsController::class, 'blogs'])->name('blogs');
+        Route::get('/tao-tin-tuc', [BlogsController::class, 'creBlo'])->name('creBlo');
     });
 
     Route::get('/picture/', [DashboardController::class, 'picture'])->name('dashboard.picture');
