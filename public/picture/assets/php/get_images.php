@@ -1,6 +1,6 @@
 <?php
 // $directory = '../../../../ct_shop/picture/products/images/'; // Thay đổi đường dẫn này thành đường dẫn thư mục chứa các tệp tin hình ảnh của bạn
-$directory = '../upload/';
+$directory = '../upload/images/';
 
 // Lấy danh sách các tệp tin trong thư mục
 $files = scandir($directory);
