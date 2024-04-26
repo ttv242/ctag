@@ -13,7 +13,7 @@
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-   
+
 
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard/vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -28,6 +28,33 @@
 
         .annual_report .c3-axis.c3-axis-x {
             display: none;
+        }
+
+        .ck-editor__main>* {
+            height: 500px;
+        }
+
+        .ck-editor__editable[role="textbox"] {
+            /* Editing area */
+            min-height: 200px;
+        }
+
+        .ck-content .image {
+            /* Block images */
+            max-width: 80%;
+            margin: 20px auto;
+        }
+
+        .custom-block-indent-a {
+            margin-left: 10%;
+        }
+
+        .custom-block-indent-b {
+            margin-left: 20%;
+        }
+
+        .custom-block-indent-c {
+            margin-left: 30%;
         }
     </style>
     <!-- MAIN CSS -->
@@ -48,7 +75,8 @@
         {{-- <div class="page-loader-wrapper">
             <div class="loader">
                 <div class="m-t-30"><img src="{{ asset('dashboard/images/logo-icon.svg') }}" width="48" height="48"
-                    alt="Iconic"></div>
-                <p>Please wait...</p>
-            </div>
-        </div> --}}
+        alt="Iconic">
+    </div>
+    <p>Please wait...</p>
+    </div>
+    </div> --}}

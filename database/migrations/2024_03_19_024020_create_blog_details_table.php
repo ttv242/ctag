@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('blog_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('parent_id');
+            $table->foreign('parent_id')->references('id')->on('blogs')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('meta_keyword');
+            $table->text('meta_description');
+            $table->text('content');
             $table->timestamps();
         });
     }

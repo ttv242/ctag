@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://cs.symfony.com">
-        <img src="./logo.jpg" title="PHP CS Fixer" alt="PHP CS Fixer logo">
+        <img src="./logo.png" title="PHP CS Fixer" alt="PHP CS Fixer logo">
     </a>
 </p>
 
