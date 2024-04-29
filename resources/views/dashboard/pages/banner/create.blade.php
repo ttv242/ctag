@@ -15,7 +15,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href=""><i class="fa fa-dashboard"></i></a></li>
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item">Bài viết</li>
+                        <li class="breadcrumb-item">Quảng cáo</li>
                         <li class="breadcrumb-item active">Thêm</li>
                     </ul>
                 </div>
@@ -27,21 +27,17 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Viết bài</h2>
+                        <h2>Quảng cáo</h2>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <form id="basic-form" action="{{ route('dashboard.creBlo') }}" method="POST" enctype="multipart/form-data" novalidate="">
-                            @csrf
+                            <form id="basic-form" action="{{ route('dashboard.creBan') }}" method="POST" enctype="multipart/form-data" novalidate="">
+                                @csrf
                                 <div class="form-group">
-                                    <label>Tiêu đề bài viết</label>
+                                    <label>Tiêu đề quảng cáo</label>
                                     <input type="text" class="form-control" required="" name="title" placeholder="Tiêu đề bài viết ở đây...">
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Mô tả ngắn bài viết</label>
-                                    <textarea class="form-control" rows="5" cols="30" required="" name="summary" placeholder="Mô tả ngắn bài viết ở đây..."></textarea>
-                                </div>
                                 <div class="form-group">
                                     <label>Hình ảnh</label>
                                     <button class="col-12 p-2 border" class="uploadImage" data-select-images='true'>Chọn
@@ -50,9 +46,27 @@
                                     </button>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nội dung bài viết</label>
-                                    <textarea id="editor" class="form-control" rows="10" cols="30" required="" name="content"></textarea>
+                                    <label>Quảng cáo Sản Phẩm</label>
+                                    <div class="c_multiselect">
+                                        <select class="form-select form-control" name="parent_id" aria-label="Default select example">
+                                            <option selected>Chọn sản phẩm quảng cáo </option>
+                                            @foreach ($product as $key => $item)
+                                            @if ($item['hidden'] == 1)
+                                            @continue
+                                            @endif
+                                            <option value="{{ $item['id'] }}">
+                                                {{ $item['name'] }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Link quảng cáo</label>
+                                    <input type="url" class="form-control" required="" name="url">
+                                </div>
+
                                 <div class="col-12 row">
                                     <div class="form-group col-6">
                                         <label>Trạng thái</label>
@@ -67,27 +81,7 @@
                                         </label>
                                         <p id="error-radio"></p>
                                     </div>
-                                    <div class="form-group col-6">
-                                        <label>Nổi bật</label>
-                                        <br>
-                                        <label class="fancy-radio">
-                                            <input type="radio" name="featured" value="0" required="" data-parsley-errors-container="#error-radio" data-parsley-multiple="featured" checked>
-                                            <span><i></i>Không</span>
-                                        </label>
-                                        <label class="fancy-radio">
-                                            <input type="radio" name="featured" value="1" data-parsley-multiple="featured">
-                                            <span><i></i>Có</span>
-                                        </label>
-                                        <p id="error-radio"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Meta keyword</label>
-                                    <textarea class="form-control" rows="5" cols="30" required="" name="meta_keyword" placeholder="Meta keywords (từ khóa meta): Nhập các từ khóa liên quan đến nội dung..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Meta description</label>
-                                    <textarea class="form-control" rows="5" cols="30" required="" name="meta_description" placeholder="Meta description (mô tả meta): Nhập mô tả ngắn về nội dung..."></textarea>
+
                                 </div>
                                 <input type="submit" class="col-12 btn btn-primary" name="create" value="Submit">
                             </form>

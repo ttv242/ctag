@@ -11,11 +11,11 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Danh sách bài viết</h2>
+                    <h2>Danh sách quảng cáo </h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.') }}"><i class="fa fa-dashboard"></i></a></li>
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item">Bài viết</li>
+                        <li class="breadcrumb-item">Quảng cáo</li>
                         <li class="breadcrumb-item active">Danh sách</li>
                     </ul>
                 </div>
@@ -27,11 +27,11 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="header row">
-                        <h2 class="col-lg-6 col-md-6 col-sm-12">Danh mục tin tức</h2>
+                        <h2 class="col-lg-6 col-md-6 col-sm-12">Danh mục Quảng cáo</h2>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="d-flex flex-row-reverse">
                                 <div class="page_action">
-                                    <a href="{{ route('dashboard.creBlo') }}">
+                                    <a href="{{ route('dashboard.creBan') }}">
                                         <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i>
                                             Thêm</button>
                                     </a>
@@ -58,7 +58,7 @@
                                 <tbody>
 
 
-                                    @forelse ($blogs as $key => $item)
+                                    @forelse ($banner as $key => $item)
 
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
@@ -83,7 +83,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="4" class="text-center mt-2 h6 text-danger">Không có tài khoản
+                                        <td colspan="4" class="text-center mt-2 h6 text-danger">Không có quảng cáo
                                         </td>
                                     </tr>
                                     @endforelse

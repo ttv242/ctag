@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\BlogDetail;
 
 class Blog extends Model
 {
@@ -13,4 +14,8 @@ class Blog extends Model
         'id', 'title',
         'summary', 'img'
     ];
+    public function blog_detail()
+    {
+        return $this->hasOne(BlogDetail::class,'parent_id', 'id');
+    }
 }

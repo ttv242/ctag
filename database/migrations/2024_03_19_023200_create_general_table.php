@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('general', function (Blueprint $table) {
             $table->id();
+            $table->string('meta_keyword')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('company_name')->nullable();
+            $table->text('introduce')->nullable();
+            $table->string('email')->nullable();
+            $table->string('facebook')->nullable();
+            $table->integer('phone')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

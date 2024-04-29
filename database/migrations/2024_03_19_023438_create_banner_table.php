@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('banner', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("parent_id");
+            $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->string("title");
+            $table->string("img");
+            $table->string("url");
+            $table->boolean('hidden')->default(true);
             $table->timestamps();
         });
     }
