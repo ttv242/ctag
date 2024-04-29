@@ -13,10 +13,10 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <h2>Tạo bài viết</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href=""><i class="fa fa-dashboard"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.') }}"><i class="fa fa-dashboard"></i></a></li>
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item">Bài viết</li>
-                        <li class="breadcrumb-item active">Thêm</li>
+                        <li class="breadcrumb-item">Cập nhật bài viết</li>
+                        <li class="breadcrumb-item active">Cập nhật</li>
                     </ul>
                 </div>
             </div>
@@ -31,27 +31,30 @@
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <form id="basic-form" action="{{ route('dashboard.creBlo') }}" method="POST" enctype="multipart/form-data" novalidate="">
-                            @csrf
+                            <form id="basic-form" action="{{ route('dashboard.updateBlo')}}/{{ 'update' }}/{{ $data->id }}" method="POST" enctype="multipart/form-data" novalidate="">
+                                @csrf
+                                @method('PUT')
                                 <div class="form-group">
                                     <label>Tiêu đề bài viết</label>
-                                    <input type="text" class="form-control" required="" name="title" placeholder="Tiêu đề bài viết ở đây...">
+                                    <input type="text" class="form-control" required="" name="title" value="{{$data->title}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Mô tả ngắn bài viết</label>
-                                    <textarea class="form-control" rows="5" cols="30" required="" name="summary" placeholder="Mô tả ngắn bài viết ở đây..."></textarea>
+                                    <textarea class="form-control" rows="5" cols="30" required="" name="summary">
+                                    {{$data->summary}}
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Hình ảnh</label>
                                     <button class="col-12 p-2 border" class="uploadImage" data-select-images='true'>Chọn
                                         ảnh
-                                        <input type="hidden" value name="img">
+                                        <input type="hidden" value="{{$data->img}}" name="img">
                                     </button>
                                 </div>
                                 <div class="form-group">
                                     <label>Nội dung bài viết</label>
-                                    <textarea id="editor" class="form-control" rows="10" cols="30" required="" name="content"></textarea>
+                                    <textarea id="editor" class="form-control" rows="10" cols="30" required="" name="content">{{$data->blog_detail->content}}</textarea>
                                 </div>
                                 <div class="col-12 row">
                                     <div class="form-group col-6">
@@ -83,11 +86,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Meta keyword</label>
-                                    <textarea class="form-control" rows="5" cols="30" required="" name="meta_keyword" placeholder="Meta keywords (từ khóa meta): Nhập các từ khóa liên quan đến nội dung..."></textarea>
+                                    <textarea class="form-control" rows="5" cols="30" required="" name="meta_keyword">
+                                    {{$data->blog_detail->meta_keyword}}
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Meta description</label>
-                                    <textarea class="form-control" rows="5" cols="30" required="" name="meta_description" placeholder="Meta description (mô tả meta): Nhập mô tả ngắn về nội dung..."></textarea>
+                                    <textarea class="form-control" rows="5" cols="30" required="" name="meta_description">
+                                    {{$data->blog_detail->meta_description}}
+                                    </textarea>
                                 </div>
                                 <input type="submit" class="col-12 btn btn-primary" name="create" value="Submit">
                             </form>

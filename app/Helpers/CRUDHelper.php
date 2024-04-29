@@ -71,7 +71,10 @@ class CRUDHelper extends Helper
                 $basename = basename($data['img']);
                 $data['img'] = 'picture/assets/upload/' . $basename;
             }
-
+            if (isset($data['logo'])) {
+                $basename = basename($data['logo']);
+                $data['logo'] = 'picture/assets/upload/' . $basename;
+            }
             if (isset($data['album'])) {
                 $data['album'] = explode(',', $data['album']);
 

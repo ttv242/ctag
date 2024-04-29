@@ -15,6 +15,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\StatisticalController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\GeneralsController;
+use App\Http\Controllers\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,8 +148,21 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/Nguoi-ban-hang-gioi/{start}/{end}', [StatisticalController::class, 'bestSellerdate'])->name('statistica.bestSellerdate');
 
         // Tin tức
-        Route::get('/tin-tuc', [BlogsController::class, 'blogs'])->name('blogs');
+        Route::get('/tin-tuc/{slug?}/{id?}', [BlogsController::class, 'blogs'])->name('blogs');
         Route::get('/tao-tin-tuc', [BlogsController::class, 'creBlo'])->name('creBlo');
+        Route::post('/tao-tin-tuc', [BlogsController::class, 'creBlo'])->name('creBlo');
+        Route::put('/cap-nhat-tin-tuc/{slug?}/{id?}', [BlogsController::class, 'blogs'])->name('updateBlo');
+
+        // thông tin trang website
+        Route::get('/thong-tin/{slug?}', [GeneralsController::class, 'general'])->name('general');
+        Route::put('/cap-nhat-thong-tin/{slug?}', [GeneralsController::class, 'general'])->name('updateGen');
+
+        // trang banner
+        Route::get('/quang-cao/{slug?}/{id?}', [BannerController::class, 'banner'])->name('banner');
+        Route::get('/tao-quang-cao', [BannerController::class, 'creBan'])->name('creBan');
+        Route::post('tao-quang-cao', [BannerController::class, 'creBan'])->name('creBan');
+
+
     });
 
     Route::get('/picture/', [DashboardController::class, 'picture'])->name('dashboard.picture');

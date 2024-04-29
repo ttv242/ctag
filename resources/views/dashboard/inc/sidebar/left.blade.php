@@ -1,10 +1,10 @@
 @php
 
 function countOrderNotify($status){
-    $className = "App\\Models\\Order";
-    $table = $className::where('status', $status)->get();
-    $count = count($table);
-    return $count;
+$className = "App\\Models\\Order";
+$table = $className::where('status', $status)->get();
+$count = count($table);
+return $count;
 }
 
 @endphp
@@ -67,6 +67,7 @@ function countOrderNotify($status){
                                 <li><a href="h-menu.html">Slider</a></li>
                                 <li><a href="h-menu.html">Banner</a></li>
                                 <li><a href="index9.html">Tài khoản</a></li>
+                                <li><a href="{{ route('dashboard.general') }}/update/">thông tin chung</a></li>
                             </ul>
                         </li>
                         <li>
@@ -76,6 +77,7 @@ function countOrderNotify($status){
                                 </li>
                                 <li><a href="{{ route('dashboard.bra') }}"><span>Thương hiệu</span></a>
                                 </li>
+
                                 <li><a href="javascript:void(0);"><span>Sản phẩm</span></a>
                                     <ul>
                                         <li><a href="{{ route('dashboard.pro') }}">Danh sách (Tất cả)</a></li>
@@ -85,6 +87,12 @@ function countOrderNotify($status){
                                         <li><a href="{{ route('dashboard.crePro') }}">Thêm sản phẩm</a></li>
                                         <li><a href="{{ route('dashboard.monthlyOffers') }}">Ưu đãi tháng</a></li>
                                         <li><a href="{{ route('dashboard.voucher') }}">Phiếu giảm giá</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:void(0);"><span>Tin tức</span></a>
+                                    <ul>
+                                        <li><a href="{{ route('dashboard.blogs') }}">Danh sách (Tất cả)</a></li>
+
                                     </ul>
                                 </li>
                             </ul>
